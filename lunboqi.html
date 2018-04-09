@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-4.2.0.min.css" />
+		<style>
+			.mamaIntroduce .swiper-container{
+				width: 90%;
+				margin-left: 5%;
+				margin-top: 1.214rem;
+			}
+			.swiper-container img{
+				width: 100%;
+				height: 9.285rem;
+			}
+			.slide-index{
+				display: inline-block;
+				width: 0.714rem;
+				height: 0.142rem;
+				background: #D8D8D8;
+			}
+			.index{
+				text-align: center;
+			}
+			.arrow{
+				display: inline-block;
+			    position: relative;
+			    left: 0.4rem;
+			    top: -0.2rem;
+			    width: 6px;
+			    height: 6px;
+			    border-top: 1px solid #3D7ADE;
+			    border-right: 1px solid #3D7ADE;
+			    transform: rotate(139deg);
+			}
+			.teacherPhoto img{
+				border-radius: 2.321rem;
+				width: 4.642rem;height: 4.642rem;
+				margin-top: 0.3rem;
+			}
+			.mamaIntroduce .swiper-pagination{
+				top: 9.5rem;
+			}
+			.mamaIntroduce .swiper-pagination-bullet{
+				width: 0.714rem;
+				height: 0.142rem;
+				background: #D8D8D8;
+				opacity: 1;
+			}
+			.mamaIntroduce .swiper-pagination-bullet-active{
+				background: #3D7ADE;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="mamaIntroduce">
+			<div class="swiper-container">
+			    <div class="swiper-wrapper">
+			        <div class="swiper-slide"><img src="http://file.88mmmoney.com/0c62926a-eea5-417d-8607-c6f3ff00439b" /></div>
+			        <div class="swiper-slide"><img src="https://file.88mmmoney.com/2628c4ce-da82-4ed8-9a57-8df9671cfa95" /></div>
+			        <div class="swiper-slide"><img src="https://file.88mmmoney.com/2628c4ce-da82-4ed8-9a57-8df9671cfa95" /></div>
+			        <div class="swiper-slide"><img src="http://file.88mmmoney.com/0c62926a-ehttp://file.88mmmoney.com/0c62926a-eea5-417d-8607-c6f3ff00439bea5-417d-8607-c6f3ff00439b" /></div>
+			        <div class="swiper-slide"><img src="http://file.88mmmoney.com/0c62926a-eea5-417d-8607-c6f3ff00439b" /></div>
+			    </div>
+			    <br />
+			    <br />
+			    <div class="swiper-pagination"></div>
+			</div>
+		</div>
+		<div id="test">点击</div>
+	</body>
+		<script src="../js/jquery-latest.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper-4.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		adaptPageClass = 'content';
+		$(function() {
+			var mySwiper = new Swiper ('.swiper-container', {
+			    /*direction: 'vertical',*/
+			    autoplay: {
+			    	stopOnLastSlide:true,
+			    	disableOnInteraction: false,  //设置为false,触屏后自动滑动不会停止			    	
+			    },
+			    pagination: {
+				    el: '.swiper-pagination',
+				},  
+			    loop: true,	
+			    // 如果需要滚动条
+			    scrollbar: '.swiper-scrollbar',
+			})  
+			
+		})
+		
+		
+		$("#test").click(function(){
+
+			var xhr = createXHR();
+			function createXHR() {
+			    if (typeof XMLHttpRequest != "undefined") {
+			        return new XMLHttpRequest();
+			    } else if (typeof ActiveXObject != "undefined") {
+			        if (typeof arguments.callee.activeXString != "string") {
+			            var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0", "MSXML2.XMLHttp"];
+			            for (var i = 0, len = versions.length; i < len; i++) {
+			                try {
+			                    new ActiveXObect(versions[i]);
+			                    arguments.callee.activeXString = versions[i];
+			                    break;
+			                } catch (ex) {
+			                    //跳过
+			                }
+			            }
+			        }
+			        return new ActiveXObect(arguments.callee.activeXString);
+			    } else {
+			        throw new Error("No XHR object available.");
+			    }
+			}
+			//alert(xhr);
+			xhr.onreadystatechange = function(){
+
+				if(xhr.readyState == 4){
+					if((xhr.status >= 200 && xhr.status < 300) || xhr.status ==304){
+
+						var data = xhr.responseText;  //获取接口传回的数据
+						var data3 = JSON.parse(data);  //将json数据转为js对象
+						console.log(data3[1].gejin)
+					}else{
+						alert("test");
+					}
+				}
+			};
+			
+			xhr.open("get","../data.json",true);
+			xhr.send(null);
+		})
+		
+		
+	</script>
+</html>
